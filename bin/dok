@@ -1,0 +1,35 @@
+#!/usr/bin/env node
+
+var program = require('commander');
+var shell = require('shelljs');
+var dok = require('../index.js');
+
+program
+  .version('0.0.1')
+  .usage('<command>');
+
+// '$ dok publish'
+program
+ .command('publish')
+ .description('push docs to gh-pages')
+ .action(function(){
+   var cwd = process.cwd();
+   var command = 'git subtree push --prefix ' + cwd + '/docs/ origin gh-pages';
+   var res = shell.exec(command, {silent: true});
+   if (res.code) throw new Error(data.output);
+   console.log('success');
+ });
+
+// '$ dok create'
+program
+ .command('create')
+ .description('create docs/ folder with .md partials and index.html')
+ .action(function(){
+   dok('index.js');
+ });
+
+// parse all arguments
+program.parse(process.argv);
+
+// display help for '$ dok' and '$ dok *'
+console.log(program.helpInformation());
