@@ -1,5 +1,4 @@
 
-
 ### {{name}}({{args}})
 
 {{{description}}}
@@ -9,11 +8,10 @@
 {{/each}}
 
 {{#if returns}}
-### Returns
+#### Returns
 
-{{returns}}
+{{{returns}}}
 {{/if}}
-
 
 {{#if examples}}
 #### Example
@@ -21,5 +19,4 @@
 {{#each examples}}
 {{{this}}}
 {{/each}}
-
 {{/if}}
