@@ -21,9 +21,9 @@ program
  .description('push docs to gh-pages')
  .action(function(){
    var cwd = process.cwd();
-   var command = 'git subtree push --prefix ' + cwd + '/docs/ origin gh-pages';
+   var command = 'git subtree push --prefix docs/ origin gh-pages';
    var res = shell.exec(command, {silent: true});
-   if (res.code) throw new Error(data.output);
+   if (res.code) throw new Error(res.output);
    console.log('success');
  });
 
