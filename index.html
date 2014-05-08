@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>dok</title>
+    <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
+    <link rel="stylesheet" href="css/prism.css">
+    <link rel="stylesheet" href="css/styles.css">
+  </head>
+  <body data-spy="scroll" data-target="nav" data-offset="100">
+    <h1>
+      dok
+      <a href="https://github.com/zeMirco/dok" target="_blank" class="repo-link">
+        <i class="fa fa-github"></i>
+      </a>
+    </h1>
+    <nav>
+      <ul class="nav">
+        
+        <li>
+          <a href="#jsdoc-file-" data-lineno="37">jsdoc</a>
+        </li>
+        
+        <li>
+          <a href="#parseargs-fn-" data-lineno="74">parseArgs</a>
+        </li>
+        
+        <li>
+          <a href="#parsedescription-desc-" data-lineno="98">parseDescription</a>
+        </li>
+        
+        <li>
+          <a href="#parseexamples-examples-" data-lineno="119">parseExamples</a>
+        </li>
+        
+        <li>
+          <a href="#parseparams-params-" data-lineno="162">parseParams</a>
+        </li>
+        
+        <li>
+          <a href="#parsereturns-returns-" data-lineno="201">parseReturns</a>
+        </li>
+        
+        <li>
+          <a href="#render-fns-" data-lineno="214">render</a>
+        </li>
+        
+        <li>
+          <a href="#copy-" data-lineno="251">copy</a>
+        </li>
+        
+        <li>
+          <a href="#write-" data-lineno="273">write</a>
+        </li>
+        
+        <li>
+          <a href="#create-file-" data-lineno="302">create</a>
+        </li>
+        
+        <li>
+          <a href="#getlevel-str-" data-lineno="326">getLevel</a>
+        </li>
+        
+        <li>
+          <a href="#index-section-headings-" data-lineno="342">index</a>
+        </li>
+        
+        <li>
+          <a href="#find-level-headings-" data-lineno="364">find</a>
+        </li>
+        
+        <li>
+          <a href="#clear-section-readme-" data-lineno="442">clear</a>
+        </li>
+        
+        <li>
+          <a href="#include-section-readme-content-" data-lineno="470">include</a>
+        </li>
+        
+        <li>
+          <a href="#updatereadme-section-" data-lineno="482">updateReadme</a>
+        </li>
+        
+      </ul>
+    </nav>
+    
+    <section>
+      <h3 id="jsdoc-file-">jsdoc(file)</h3>
+<p>Generate docs JSON by using patched JSDoc haruki template.
+The patched version includes <code>lineno</code>.</p>
+<ul>
+<li><code>file</code> <strong>String</strong> - JavaScript file with comments to parse</li>
+</ul>
+<h4 id="returns">Returns</h4>
+<ul>
+<li><strong>Object</strong> - JSON data for all comments in file</li>
+</ul>
+
+    </section>
+    
+    <section>
+      <h3 id="parseargs-fn-">parseArgs(fn)</h3>
+<p>Generate a String with comma separated function arguments.
+Put square brackets around optional arguments.
+Ignore child arguments like <code>config.key</code>.</p>
+<ul>
+<li><code>fn</code> <strong>Object</strong> - JSON object for single function from JSDoc</li>
+</ul>
+<h4 id="returns">Returns</h4>
+<ul>
+<li><strong>String</strong> - Comma separated arguments</li>
+</ul>
+<h4 id="example">Example</h4>
+<pre><code class="lang-javascript">var fn = {
+  name: &#39;sum&#39;,
+  description: &#39;...&#39;,
+  parameters: [
+    {
+      name: &#39;x&#39;,
+      optional: &#39;&#39;
+    },
+    {
+      name: &#39;y&#39;,
+      optional: true
+    }
+  ]
+};
+var out = parseArgs(fn);
+// x, [y]
+</code></pre>
+
+    </section>
+    
+    <section>
+      <h3 id="parsedescription-desc-">parseDescription(desc)</h3>
+<p>Generate gfm description from JSDoc description.
+Replace <code>code</code> tags with markdown code tags.</p>
+<ul>
+<li><code>desc</code> <strong>String</strong> - JSDoc description string</li>
+</ul>
+<h4 id="returns">Returns</h4>
+<ul>
+<li><strong>String</strong> - Markdown description</li>
+</ul>
+<h4 id="example">Example</h4>
+<pre><code class="lang-javascript">var desc = &#39;&lt;p&gt;Some description with variable &lt;code&gt;a&lt;/code&gt;&lt;/p&gt;&#39;
+var parsed = parseDescription(desc);
+// Some description with variable `a`
+</code></pre>
+
+    </section>
+    
+    <section>
+      <h3 id="parseexamples-examples-">parseExamples(examples)</h3>
+<p>Generate gfm compatible code block from JSDoc parsed
+examples array.</p>
+<ul>
+<li><code>examples</code> <strong>Array</strong> - JSDoc examples array</li>
+</ul>
+<h4 id="returns">Returns</h4>
+<ul>
+<li><strong>Array</strong> - Fenced code blocks with separate caption</li>
+</ul>
+<h4 id="example">Example</h4>
+<pre><code class="lang-javascript">var examples = [
+  &#39;var z = sum(10, 20);\nconsole.log(z);\n// 40&#39;
+];
+var parsed = parseExamples(examples);
+// [
+//   &#39;```javascript\nvar z = sum(10, 20);\nconsole.log(z);\n// 40\n```&#39;
+// ]
+</code></pre>
+
+    </section>
+    
+    <section>
+      <h3 id="parseparams-params-">parseParams(params)</h3>
+<p>Generate markdown list item from parameter object.</p>
+<ul>
+<li><code>params</code> <strong>Array</strong> - Array with parameters from JSDoc</li>
+</ul>
+<h4 id="returns">Returns</h4>
+<ul>
+<li><strong>Array</strong> - Array with markdown list items</li>
+</ul>
+<h4 id="example">Example</h4>
+<pre><code class="lang-javascript">var params = [
+  {
+    name: &#39;x&#39;,
+    type: &#39;Number&#39;,
+    description: &#39;&lt;p&gt;First number&lt;/p&gt;&#39;
+  },
+  {
+    name: &#39;y&#39;,
+    type: &#39;Number&#39;,
+    description: &#39;&lt;p&gt;Second number&lt;/p&gt;&#39;,
+    default: &#39;20&#39;,
+    optional: true
+  }
+];
+var parsed = parseParams(params);
+// [
+//   - `x` **Number** - First number
+//   - `y` **Number** *optional*  - Second number - default `20`
+// ]
+</code></pre>
+
+    </section>
+    
+    <section>
+      <h3 id="parsereturns-returns-">parseReturns(returns)</h3>
+<p>Generate markdown returns block.</p>
+<ul>
+<li><code>returns</code> <strong>Object</strong> - Returns object from JSDoc</li>
+</ul>
+<h4 id="returns">Returns</h4>
+<ul>
+<li><strong>String</strong> - Markdown formatted list item</li>
+</ul>
+<h4 id="example">Example</h4>
+<pre><code class="lang-javascript">var returns = {
+  type: &#39;String&#39;,
+  description: &#39;&lt;p&gt;Some description here&lt;/p&gt;&#39;
+};
+var parsed = parseReturns(returns);
+// - **String** - Some description here
+</code></pre>
+
+    </section>
+    
+    <section>
+      <h3 id="render-fns-">render(fns)</h3>
+<p>Use handlebars to render template to index.html. Include line number for
+link to source code on GitHub.</p>
+<ul>
+<li><code>fns</code> <strong>Array</strong> - Array with all functions from JSDoc json</li>
+</ul>
+
+    </section>
+    
+    <section>
+      <h3 id="copy-">copy()</h3>
+<p>Copy CSS and JS folder to modules docs/ folder. These static assets
+are required for index.html.</p>
+
+    </section>
+    
+    <section>
+      <h3 id="write-">write()</h3>
+<p>Write markdown files for each function.</p>
+
+    </section>
+    
+    <section>
+      <h3 id="create-file-">create(file)</h3>
+<p>Create docs/ directory with .md partials in includes/ directory.
+Render index.html and copy statis assets (CSS and JS) to /docs
+directory.</p>
+<ul>
+<li><code>file</code> <strong>String</strong> - JavaScript with JSDoc comments</li>
+</ul>
+
+    </section>
+    
+    <section>
+      <h3 id="getlevel-str-">getLevel(str)</h3>
+<p>Return heading level. Count number of hashes (<code>#</code>) in <code>str</code>.</p>
+<ul>
+<li><code>str</code> <strong>String</strong> - Markdown heading string</li>
+</ul>
+<h4 id="returns">Returns</h4>
+<ul>
+<li><strong>Number</strong> - Number of hashes</li>
+</ul>
+<h4 id="example">Example</h4>
+<pre><code class="lang-javascript">var one = &#39;## a&#39;;
+var levelOne = getLevel(one);  // 2
+var two = &#39;#### b&#39;;
+var levelTwo = getLevel(two);  // 4
+</code></pre>
+
+    </section>
+    
+    <section>
+      <h3 id="index-section-headings-">index(section, headings)</h3>
+<p>Find section index in array with all README.md headings.</p>
+<ul>
+<li><p><code>section</code> <strong>String</strong> - Section name</p>
+</li>
+<li><p><code>headings</code> <strong>Array</strong> - Array with all README.md headings</p>
+</li>
+</ul>
+<h4 id="example">Example</h4>
+<pre><code class="lang-javascript">var section = &#39;c&#39;;
+var headings = [&#39;# a&#39;, &#39;## b&#39;, &#39;## c&#39;, &#39;## d&#39;, &#39;## e&#39;];
+// 2
+</code></pre>
+
+    </section>
+    
+    <section>
+      <h3 id="find-level-headings-">find(level, headings)</h3>
+<p>Find first heading with given level in <code>headings</code> array.
+<code>headings</code> is a subarray sliced just behind the heading after that
+we&#39;d like to include the markdown content.</p>
+<ul>
+<li><p><code>level</code> <strong>Number</strong> - Heading level. Number between <code>1</code> and <code>6</code></p>
+</li>
+<li><p><code>headings</code> <strong>Array</strong> - Partial array of all README.md headings</p>
+</li>
+</ul>
+<h4 id="example">Example</h4>
+<pre><code class="lang-javascript">var level = 3;
+var headings = [&#39;# a&#39;, &#39;### b&#39;, &#39;## c&#39;, &#39;## d&#39;];
+var index = find(level, headings);
+// 1
+</code></pre>
+
+    </section>
+    
+    <section>
+      <h3 id="clear-section-readme-">clear(section, readme)</h3>
+<p>Clear old content from <code>readme</code>. Start just behind <code>section</code> and look
+for next heading that has the same level. Everything in between is cleared.</p>
+<ul>
+<li><p><code>section</code> <strong>String</strong> - Clear all content below this section</p>
+</li>
+<li><p><code>readme</code> <strong>String</strong> - All markdown content from README.md</p>
+</li>
+</ul>
+<h4 id="returns">Returns</h4>
+<ul>
+<li><strong>String</strong> - <code>readme</code> without any content below <code>section</code></li>
+</ul>
+<h4 id="example">Example</h4>
+<p><code>README.md</code></p>
+<pre><code class="lang-javascript"># Some title
+
+## Installation
+
+`npm install module`
+
+## Config
+
+Here is how to configure the module.
+
+### Sub config
+
+...
+
+## Methods
+
+### sum(x,y)
+
+Returns the sum of two Numbers.
+
+...
+
+## Test
+
+...
+
+## License
+
+...
+</code></pre>
+<p><code>index.js</code></p>
+<pre><code class="lang-javascript">var readme = fs.readFileSync(&#39;./README.md&#39;, &#39;utf8&#39;);
+var section = &#39;Methods&#39;;
+readme = clear(section, readme);
+// # Some title
+//
+// ## Installation
+//
+// `npm install module`
+//
+// ## Config
+//
+// Here is how to configure the module.
+//
+// ### Sub config
+//
+// ...
+//
+// ## Methods
+//
+// ## Test
+//
+// ...
+//
+// ## License
+//
+// ...
+</code></pre>
+
+    </section>
+    
+    <section>
+      <h3 id="include-section-readme-content-">include(section, readme, content)</h3>
+<p>Include markdown content into <code>readme</code>.</p>
+<ul>
+<li><p><code>section</code> <strong>String</strong> - <code>content</code> is included just below this section</p>
+</li>
+<li><p><code>readme</code> <strong>String</strong> - Old README.md that is cleared below <code>section</code></p>
+</li>
+<li><p><code>content</code> <strong>content</strong> - The content to include after <code>section</code></p>
+</li>
+</ul>
+
+    </section>
+    
+    <section>
+      <h3 id="updatereadme-section-">updateReadme(section)</h3>
+<p>Include .md partials in README.md below <code>section</code>.</p>
+<ul>
+<li><code>section</code> <strong>String</strong> - Section name</li>
+</ul>
+
+    </section>
+    
+  </body>
+  <script src="http://code.jquery.com/jquery-2.1.0.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script src="js/prism.js"></script>
+  <script>
+    // add 'language-javascript' to <code> blocks (some already have it)
+    var codeBlocks = document.getElementsByTagName('code');
+    for (var i = 0; i < codeBlocks.length; i++) {
+      var block = codeBlocks[i];
+      block.classList.add('language-javascript');
+    }
+    // add hover links to all function headings
+    var headings = document.getElementsByTagName('h3');
+    for (var i = 0; i < headings.length; i++) {
+      var heading = headings[i];
+      var id = heading.getAttribute('id');
+      // create anchor link for deep linking to function
+      var anchorLink = document.createElement('a');
+      anchorLink.href = '#' + id;
+      anchorLink.classList.add('link');
+      anchorLink.innerHTML = '<i class="fa fa-link"></i>';
+      heading.appendChild(anchorLink);
+      // create link to github repo code with line number
+      var navLink = document.querySelector('a[href="#' + id + '"]');
+      var lineno = navLink.getAttribute('data-lineno');
+      var sourceLink = document.createElement('a');
+      sourceLink.href = 'https://github.com/zeMirco/dok/blob/master/index.js#L' + lineno;
+      sourceLink.classList.add('source-link');
+      sourceLink.innerHTML = '<i class="fa fa-code"></i>';
+      sourceLink.target = '_blank';
+      heading.appendChild(sourceLink);
+    }
+    // highlight
+    Prism.highlightAll();
+  </script>
+</html>
