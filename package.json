@@ -1,6 +1,6 @@
 {
   "name": "dok",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "create docs",
   "main": "index.js",
   "scripts": {
