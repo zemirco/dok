@@ -5,8 +5,15 @@ var shell = require('shelljs');
 var dok = require('../index.js');
 
 program
-  .version('0.0.1')
-  .usage('<command>');
+  .version('0.0.1');
+
+// '$ dok create'
+program
+ .command('create')
+ .description('create docs/ folder with .md partials and index.html')
+ .action(function(){
+   dok.create('index.js');
+ });
 
 // '$ dok publish'
 program
@@ -20,16 +27,17 @@ program
    console.log('success');
  });
 
-// '$ dok create'
+// '$ dok readme'
 program
- .command('create')
- .description('create docs/ folder with .md partials and index.html')
- .action(function(){
-   dok('index.js');
+ .command('readme')
+ .description('include .md partials in your README.md')
+ .option('-s, --section <section>', 'under which <section> to include the partials', 'Methods')
+ .action(function(options){
+   dok.updateReadme(options.section);
  });
 
 // parse all arguments
 program.parse(process.argv);
 
 // display help for '$ dok' and '$ dok *'
-console.log(program.helpInformation());
+if (!program.args.length) program.help();
