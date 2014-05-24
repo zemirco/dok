@@ -327,7 +327,7 @@ function create(file) {
  */
 function getLevel(str) {
   var hashes = str.match(/#+/);
-  return hashes[0].length;
+  return hashes && hashes[0].length;
 }
 
 /**
