@@ -346,7 +346,7 @@ function index(section, headings) {
     var heading = headings[i];
     if (heading.indexOf(section) !== -1) return i;
   }
-  throw new Error('your README.md doesn\'t have the heading "' + section + '"');
+  return null;
 }
 
 /**
