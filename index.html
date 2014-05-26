@@ -6,85 +6,92 @@
     <link rel="stylesheet" href="css/prism.css">
     <link rel="stylesheet" href="css/styles.css">
   </head>
-  <body data-spy="scroll" data-target="nav" data-offset="100">
-    <h1>
-      dok
-      <a href="https://github.com/zeMirco/dok" target="_blank" class="repo-link">
-        <i class="fa fa-github"></i>
-      </a>
-    </h1>
+  <body data-spy="scroll" data-target="nav" data-offset="80">
+    <header>
+      <h1>
+        dok
+        <a href="https://github.com/zeMirco/dok" target="_blank" class="repo-link">
+          <i class="fa fa-github"></i>
+        </a>
+      </h1>
+    </header>
     <nav>
       <ul class="nav">
         
         <li>
-          <a href="#jsdoc-file-" data-lineno="39">jsdoc</a>
+          <a href="#jsdoc-file-" data-lineno="40">jsdoc</a>
         </li>
         
         <li>
-          <a href="#parseargs-fn-" data-lineno="76">parseArgs</a>
+          <a href="#parseargs-fn-" data-lineno="77">parseArgs</a>
         </li>
         
         <li>
-          <a href="#parsedescription-desc-" data-lineno="100">parseDescription</a>
+          <a href="#parsedescription-desc-" data-lineno="101">parseDescription</a>
         </li>
         
         <li>
-          <a href="#parseexamples-examples-" data-lineno="121">parseExamples</a>
+          <a href="#parseexamples-examples-" data-lineno="122">parseExamples</a>
         </li>
         
         <li>
-          <a href="#parseparams-params-" data-lineno="164">parseParams</a>
+          <a href="#parseparams-params-" data-lineno="165">parseParams</a>
         </li>
         
         <li>
-          <a href="#parsereturns-returns-" data-lineno="203">parseReturns</a>
+          <a href="#parsereturns-returns-" data-lineno="204">parseReturns</a>
         </li>
         
         <li>
-          <a href="#render-fns-" data-lineno="216">render</a>
+          <a href="#render-fns-" data-lineno="217">render</a>
         </li>
         
         <li>
-          <a href="#copy-" data-lineno="253">copy</a>
+          <a href="#clean-" data-lineno="254">clean</a>
         </li>
         
         <li>
-          <a href="#write-" data-lineno="275">write</a>
+          <a href="#copy-" data-lineno="262">copy</a>
         </li>
         
         <li>
-          <a href="#create-file-" data-lineno="304">create</a>
+          <a href="#write-" data-lineno="319">write</a>
         </li>
         
         <li>
-          <a href="#getlevel-str-" data-lineno="328">getLevel</a>
+          <a href="#create-file-" data-lineno="348">create</a>
         </li>
         
         <li>
-          <a href="#index-section-headings-" data-lineno="344">index</a>
+          <a href="#getlevel-str-" data-lineno="376">getLevel</a>
         </li>
         
         <li>
-          <a href="#find-level-headings-" data-lineno="366">find</a>
+          <a href="#index-section-headings-" data-lineno="392">index</a>
         </li>
         
         <li>
-          <a href="#clear-section-readme-" data-lineno="444">clear</a>
+          <a href="#find-level-headings-" data-lineno="414">find</a>
         </li>
         
         <li>
-          <a href="#include-section-readme-content-" data-lineno="472">include</a>
+          <a href="#clear-section-readme-" data-lineno="492">clear</a>
         </li>
         
         <li>
-          <a href="#updatereadme-section-" data-lineno="484">updateReadme</a>
+          <a href="#include-section-readme-content-" data-lineno="520">include</a>
+        </li>
+        
+        <li>
+          <a href="#updatereadme-section-" data-lineno="532">updateReadme</a>
         </li>
         
       </ul>
     </nav>
-    
-    <section>
-      <h3 id="jsdoc-file-">jsdoc(file)</h3>
+    <main>
+      
+      <section>
+        <h3 id="jsdoc-file-">jsdoc(file)</h3>
 <p>Generate docs JSON by using patched JSDoc haruki template.
 The patched version includes <code>lineno</code>.</p>
 <ul>
@@ -95,10 +102,10 @@ The patched version includes <code>lineno</code>.</p>
 <li><strong>Object</strong> - JSON data for all comments in file</li>
 </ul>
 
-    </section>
-    
-    <section>
-      <h3 id="parseargs-fn-">parseArgs(fn)</h3>
+      </section>
+      
+      <section>
+        <h3 id="parseargs-fn-">parseArgs(fn)</h3>
 <p>Generate a String with comma separated function arguments.
 Put square brackets around optional arguments.
 Ignore child arguments like <code>config.key</code>.</p>
@@ -128,10 +135,10 @@ var out = parseArgs(fn);
 // x, [y]
 </code></pre>
 
-    </section>
-    
-    <section>
-      <h3 id="parsedescription-desc-">parseDescription(desc)</h3>
+      </section>
+      
+      <section>
+        <h3 id="parsedescription-desc-">parseDescription(desc)</h3>
 <p>Generate gfm description from JSDoc description.
 Replace <code>code</code> tags with markdown code tags.</p>
 <ul>
@@ -147,10 +154,10 @@ var parsed = parseDescription(desc);
 // Some description with variable `a`
 </code></pre>
 
-    </section>
-    
-    <section>
-      <h3 id="parseexamples-examples-">parseExamples(examples)</h3>
+      </section>
+      
+      <section>
+        <h3 id="parseexamples-examples-">parseExamples(examples)</h3>
 <p>Generate gfm compatible code block from JSDoc parsed
 examples array.</p>
 <ul>
@@ -170,10 +177,10 @@ var parsed = parseExamples(examples);
 // ]
 </code></pre>
 
-    </section>
-    
-    <section>
-      <h3 id="parseparams-params-">parseParams(params)</h3>
+      </section>
+      
+      <section>
+        <h3 id="parseparams-params-">parseParams(params)</h3>
 <p>Generate markdown list item from parameter object.</p>
 <ul>
 <li><code>params</code> <strong>Array</strong> - Array with parameters from JSDoc</li>
@@ -204,10 +211,10 @@ var parsed = parseParams(params);
 // ]
 </code></pre>
 
-    </section>
-    
-    <section>
-      <h3 id="parsereturns-returns-">parseReturns(returns)</h3>
+      </section>
+      
+      <section>
+        <h3 id="parsereturns-returns-">parseReturns(returns)</h3>
 <p>Generate markdown returns block.</p>
 <ul>
 <li><code>returns</code> <strong>Object</strong> - Returns object from JSDoc</li>
@@ -225,33 +232,39 @@ var parsed = parseReturns(returns);
 // - **String** - Some description here
 </code></pre>
 
-    </section>
-    
-    <section>
-      <h3 id="render-fns-">render(fns)</h3>
+      </section>
+      
+      <section>
+        <h3 id="render-fns-">render(fns)</h3>
 <p>Use handlebars to render template to index.html. Include line number for
 link to source code on GitHub.</p>
 <ul>
 <li><code>fns</code> <strong>Array</strong> - Array with all functions from JSDoc json</li>
 </ul>
 
-    </section>
-    
-    <section>
-      <h3 id="copy-">copy()</h3>
+      </section>
+      
+      <section>
+        <h3 id="clean-">clean()</h3>
+<p>Remove <code>docs/</code> folder.</p>
+
+      </section>
+      
+      <section>
+        <h3 id="copy-">copy()</h3>
 <p>Copy CSS and JS folder to modules docs/ folder. These static assets
 are required for index.html.</p>
 
-    </section>
-    
-    <section>
-      <h3 id="write-">write()</h3>
+      </section>
+      
+      <section>
+        <h3 id="write-">write()</h3>
 <p>Write markdown files for each function.</p>
 
-    </section>
-    
-    <section>
-      <h3 id="create-file-">create(file)</h3>
+      </section>
+      
+      <section>
+        <h3 id="create-file-">create(file)</h3>
 <p>Create docs/ directory with .md partials in includes/ directory.
 Render index.html and copy statis assets (CSS and JS) to /docs
 directory.</p>
@@ -259,10 +272,10 @@ directory.</p>
 <li><code>file</code> <strong>String</strong> - JavaScript with JSDoc comments</li>
 </ul>
 
-    </section>
-    
-    <section>
-      <h3 id="getlevel-str-">getLevel(str)</h3>
+      </section>
+      
+      <section>
+        <h3 id="getlevel-str-">getLevel(str)</h3>
 <p>Return heading level. Count number of hashes (<code>#</code>) in <code>str</code>.</p>
 <ul>
 <li><code>str</code> <strong>String</strong> - Markdown heading string</li>
@@ -278,10 +291,10 @@ var two = &#39;#### b&#39;;
 var levelTwo = getLevel(two);  // 4
 </code></pre>
 
-    </section>
-    
-    <section>
-      <h3 id="index-section-headings-">index(section, headings)</h3>
+      </section>
+      
+      <section>
+        <h3 id="index-section-headings-">index(section, headings)</h3>
 <p>Find section index in array with all README.md headings.</p>
 <ul>
 <li><p><code>section</code> <strong>String</strong> - Section name</p>
@@ -295,10 +308,10 @@ var headings = [&#39;# a&#39;, &#39;## b&#39;, &#39;## c&#39;, &#39;## d&#39;, &
 // 2
 </code></pre>
 
-    </section>
-    
-    <section>
-      <h3 id="find-level-headings-">find(level, headings)</h3>
+      </section>
+      
+      <section>
+        <h3 id="find-level-headings-">find(level, headings)</h3>
 <p>Find first heading with given level in <code>headings</code> array.
 <code>headings</code> is a subarray sliced just behind the heading after that
 we&#39;d like to include the markdown content.</p>
@@ -315,10 +328,10 @@ var index = find(level, headings);
 // 1
 </code></pre>
 
-    </section>
-    
-    <section>
-      <h3 id="clear-section-readme-">clear(section, readme)</h3>
+      </section>
+      
+      <section>
+        <h3 id="clear-section-readme-">clear(section, readme)</h3>
 <p>Clear old content from <code>readme</code>. Start just behind <code>section</code> and look
 for next heading that has the same level. Everything in between is cleared.</p>
 <ul>
@@ -392,10 +405,10 @@ readme = clear(section, readme);
 // ...
 </code></pre>
 
-    </section>
-    
-    <section>
-      <h3 id="include-section-readme-content-">include(section, readme, content)</h3>
+      </section>
+      
+      <section>
+        <h3 id="include-section-readme-content-">include(section, readme, content)</h3>
 <p>Include markdown content into <code>readme</code>.</p>
 <ul>
 <li><p><code>section</code> <strong>String</strong> - <code>content</code> is included just below this section</p>
@@ -406,50 +419,21 @@ readme = clear(section, readme);
 </li>
 </ul>
 
-    </section>
-    
-    <section>
-      <h3 id="updatereadme-section-">updateReadme(section)</h3>
+      </section>
+      
+      <section>
+        <h3 id="updatereadme-section-">updateReadme(section)</h3>
 <p>Include .md partials in README.md below <code>section</code>.</p>
 <ul>
 <li><code>section</code> <strong>String</strong> - Section name</li>
 </ul>
 
-    </section>
-    
+      </section>
+      
+    </main>
   </body>
   <script src="http://code.jquery.com/jquery-2.1.0.min.js"></script>
   <script src="js/bootstrap.min.js"></script>
   <script src="js/prism.js"></script>
-  <script>
-    // add 'language-javascript' to <code> blocks (some already have it)
-    var codeBlocks = document.getElementsByTagName('code');
-    for (var i = 0; i < codeBlocks.length; i++) {
-      var block = codeBlocks[i];
-      block.classList.add('language-javascript');
-    }
-    // add hover links to all function headings
-    var headings = document.getElementsByTagName('h3');
-    for (var i = 0; i < headings.length; i++) {
-      var heading = headings[i];
-      var id = heading.getAttribute('id');
-      // create anchor link for deep linking to function
-      var anchorLink = document.createElement('a');
-      anchorLink.href = '#' + id;
-      anchorLink.classList.add('link');
-      anchorLink.innerHTML = '<i class="fa fa-link"></i>';
-      heading.appendChild(anchorLink);
-      // create link to github repo code with line number
-      var navLink = document.querySelector('a[href="#' + id + '"]');
-      var lineno = navLink.getAttribute('data-lineno');
-      var sourceLink = document.createElement('a');
-      sourceLink.href = 'https://github.com/zeMirco/dok/blob/master/index.js#L' + lineno;
-      sourceLink.classList.add('source-link');
-      sourceLink.innerHTML = '<i class="fa fa-code"></i>';
-      sourceLink.target = '_blank';
-      heading.appendChild(sourceLink);
-    }
-    // highlight
-    Prism.highlightAll();
-  </script>
+  <script src="js/script.js"></script>
 </html>
