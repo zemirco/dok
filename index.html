@@ -55,35 +55,35 @@
         </li>
         
         <li>
-          <a href="#write-" data-lineno="318">write</a>
+          <a href="#write-" data-lineno="316">write</a>
         </li>
         
         <li>
-          <a href="#create-file-" data-lineno="347">create</a>
+          <a href="#create-file-" data-lineno="345">create</a>
         </li>
         
         <li>
-          <a href="#getlevel-str-" data-lineno="375">getLevel</a>
+          <a href="#getlevel-str-" data-lineno="373">getLevel</a>
         </li>
         
         <li>
-          <a href="#index-section-headings-" data-lineno="391">index</a>
+          <a href="#index-section-headings-" data-lineno="389">index</a>
         </li>
         
         <li>
-          <a href="#find-level-headings-" data-lineno="413">find</a>
+          <a href="#find-level-headings-" data-lineno="411">find</a>
         </li>
         
         <li>
-          <a href="#clear-section-readme-" data-lineno="491">clear</a>
+          <a href="#clear-section-readme-" data-lineno="489">clear</a>
         </li>
         
         <li>
-          <a href="#include-section-readme-content-" data-lineno="519">include</a>
+          <a href="#include-section-readme-content-" data-lineno="517">include</a>
         </li>
         
         <li>
-          <a href="#updatereadme-section-" data-lineno="531">updateReadme</a>
+          <a href="#updatereadme-section-" data-lineno="529">updateReadme</a>
         </li>
         
       </ul>
@@ -435,5 +435,35 @@ readme = clear(section, readme);
   <script src="http://code.jquery.com/jquery-2.1.0.min.js"></script>
   <script src="js/bootstrap.min.js"></script>
   <script src="js/prism.js"></script>
-  <script src="js/script.js"></script>
+  <script>
+    // add 'language-javascript' to <code> blocks (some already have it)
+    var codeBlocks = document.getElementsByTagName('code');
+    for (var i = 0; i < codeBlocks.length; i++) {
+      var block = codeBlocks[i];
+      block.classList.add('language-javascript');
+    }
+    // add hover links to all function headings
+    var headings = document.getElementsByTagName('h3');
+    for (var i = 0; i < headings.length; i++) {
+      var heading = headings[i];
+      var id = heading.getAttribute('id');
+      // create anchor link for deep linking to function
+      var anchorLink = document.createElement('a');
+      anchorLink.href = '#' + id;
+      anchorLink.classList.add('link');
+      anchorLink.innerHTML = '<i class="fa fa-link"></i>';
+      heading.appendChild(anchorLink);
+      // create link to github repo code with line number
+      var navLink = document.querySelector('a[href="#' + id + '"]');
+      var lineno = navLink.getAttribute('data-lineno');
+      var sourceLink = document.createElement('a');
+      sourceLink.href = 'https://github.com/zeMirco/dok/blob/master/index.js#L' + lineno;
+      sourceLink.classList.add('source-link');
+      sourceLink.innerHTML = '<i class="fa fa-code"></i>';
+      sourceLink.target = '_blank';
+      heading.appendChild(sourceLink);
+    }
+    // highlight
+    Prism.highlightAll();
+  </script>
 </html>
