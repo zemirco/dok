@@ -1,0 +1,10 @@
+
+### clean()
+
+Remove `docs/` folder.
+
+
+
+
+
+
