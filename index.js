@@ -5,6 +5,7 @@ var shell = require('shelljs');
 var handlebars = require('handlebars');
 var marked = require('marked');
 var mkdirp = require('mkdirp');
+var rimraf = require('rimraf');
 
 /**
  * Internal helpers
@@ -247,24 +248,66 @@ function render(fns) {
 }
 
 /**
+ * Remove `docs/` folder.
+ */
+function clean() {
+  rimraf.sync(process.cwd() + '/docs');
+}
+
+/**
  * Copy CSS and JS folder to modules docs/ folder. These static assets
  * are required for index.html.
  */
-function copy() {
+function copy(done) {
   var cwd = process.cwd();
+
   // create folders for static files
   mkdirp.sync(cwd + '/docs/css');
   mkdirp.sync(cwd + '/docs/js');
+  mkdirp.sync(cwd + '/docs/fonts');
+
   // read all static files
-  var bsjs = fs.readFileSync(__dirname + '/templates/js/bootstrap.min.js', 'utf8');
-  var prismjs = fs.readFileSync(__dirname + '/templates/js/prism.js', 'utf8');
-  var prismcss = fs.readFileSync(__dirname + '/templates/css/prism.css', 'utf8');
-  var stylescss = fs.readFileSync(__dirname + '/templates/css/styles.css', 'utf8');
+  var bsjs = fs.readFileSync(__dirname + '/templates/public/js/bootstrap.min.js', 'utf8');
+  var prismjs = fs.readFileSync(__dirname + '/templates/public/js/prism.js', 'utf8');
+  var scriptjs = fs.readFileSync(__dirname + '/templates/public/js/script.js', 'utf8');
+  var prismcss = fs.readFileSync(__dirname + '/templates/public/css/prism.css', 'utf8');
+  var stylescss = fs.readFileSync(__dirname + '/templates/public/css/styles.css', 'utf8');
+
+  var eot = fs.readFileSync(__dirname + '/templates/public/fonts/firasans-regular-webfont.eot', 'utf8');
+  var svg = fs.readFileSync(__dirname + '/templates/public/fonts/firasans-regular-webfont.svg', 'utf8');
+  var ttf = fs.readFileSync(__dirname + '/templates/public/fonts/firasans-regular-webfont.ttf', 'utf8');
+  var woff = fs.readFileSync(__dirname + '/templates/public/fonts/firasans-regular-webfont.woff', 'utf8');
+
+  var bold_eot = fs.readFileSync(__dirname + '/templates/public/fonts/firasans-bold-webfont.eot', 'utf8');
+  var bold_svg = fs.readFileSync(__dirname + '/templates/public/fonts/firasans-bold-webfont.svg', 'utf8');
+  var bold_ttf = fs.readFileSync(__dirname + '/templates/public/fonts/firasans-bold-webfont.ttf', 'utf8');
+  var bold_woff = fs.readFileSync(__dirname + '/templates/public/fonts/firasans-bold-webfont.woff', 'utf8');
+
+  var scp_eot = fs.readFileSync(__dirname + '/templates/public/fonts/sourcecodepro-regular-webfont.eot', 'utf8');
+  var scp_svg = fs.readFileSync(__dirname + '/templates/public/fonts/sourcecodepro-regular-webfont.svg', 'utf8');
+  var scp_ttf = fs.readFileSync(__dirname + '/templates/public/fonts/sourcecodepro-regular-webfont.ttf', 'utf8');
+  var scp_woff = fs.readFileSync(__dirname + '/templates/public/fonts/sourcecodepro-regular-webfont.woff', 'utf8');
   // write static files
   fs.writeFileSync(cwd + '/docs/js/bootstrap.min.js', bsjs);
   fs.writeFileSync(cwd + '/docs/js/prism.js', prismjs);
+  fs.writeFileSync(cwd + '/docs/js/script.js', scriptjs);
   fs.writeFileSync(cwd + '/docs/css/prism.css', prismcss);
   fs.writeFileSync(cwd + '/docs/css/styles.css', stylescss);
+
+  fs.writeFileSync(cwd + '/docs/fonts/firasans-regular-webfont.eot', eot);
+  fs.writeFileSync(cwd + '/docs/fonts/firasans-regular-webfont.svg', svg);
+  fs.writeFileSync(cwd + '/docs/fonts/firasans-regular-webfont.ttf', ttf);
+  fs.writeFileSync(cwd + '/docs/fonts/firasans-regular-webfont.woff', woff);
+
+  fs.writeFileSync(cwd + '/docs/fonts/firasans-bold-webfont.eot', bold_eot);
+  fs.writeFileSync(cwd + '/docs/fonts/firasans-bold-webfont.svg', bold_svg);
+  fs.writeFileSync(cwd + '/docs/fonts/firasans-bold-webfont.ttf', bold_ttf);
+  fs.writeFileSync(cwd + '/docs/fonts/firasans-bold-webfont.woff', bold_woff);
+
+  fs.writeFileSync(cwd + '/docs/fonts/sourcecodepro-regular-webfont.eot', scp_eot);
+  fs.writeFileSync(cwd + '/docs/fonts/sourcecodepro-regular-webfont.svg', scp_svg);
+  fs.writeFileSync(cwd + '/docs/fonts/sourcecodepro-regular-webfont.ttf', scp_ttf);
+  fs.writeFileSync(cwd + '/docs/fonts/sourcecodepro-regular-webfont.woff', scp_woff);
 }
 
 /**
@@ -302,6 +345,8 @@ function write(fns) {
  * @param {String} file - JavaScript with JSDoc comments
  */
 function create(file) {
+  // 0. clean docs/
+  clean();
   // 1. generate json docs
   var fns = jsdoc(file).functions;
   if (!fns) return;
@@ -310,7 +355,9 @@ function create(file) {
   // 3. render index.html
   render(fns);
   // 4. copy static assets to docs/ directory
-  copy();
+  copy(function() {
+    console.log('done');
+  });
 }
 
 /**
