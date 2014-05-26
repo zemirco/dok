@@ -269,7 +269,6 @@ function copy(done) {
   // read all static files
   var bsjs = fs.readFileSync(__dirname + '/templates/public/js/bootstrap.min.js', 'utf8');
   var prismjs = fs.readFileSync(__dirname + '/templates/public/js/prism.js', 'utf8');
-  var scriptjs = fs.readFileSync(__dirname + '/templates/public/js/script.js', 'utf8');
   var prismcss = fs.readFileSync(__dirname + '/templates/public/css/prism.css', 'utf8');
   var stylescss = fs.readFileSync(__dirname + '/templates/public/css/styles.css', 'utf8');
 
@@ -290,7 +289,6 @@ function copy(done) {
   // write static files
   fs.writeFileSync(cwd + '/docs/js/bootstrap.min.js', bsjs);
   fs.writeFileSync(cwd + '/docs/js/prism.js', prismjs);
-  fs.writeFileSync(cwd + '/docs/js/script.js', scriptjs);
   fs.writeFileSync(cwd + '/docs/css/prism.css', prismcss);
   fs.writeFileSync(cwd + '/docs/css/styles.css', stylescss);
 
