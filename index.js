@@ -346,7 +346,8 @@ function create(file) {
   // 0. clean docs/
   clean();
   // 1. generate json docs
-  var fns = jsdoc(file).functions;
+  var docs = jsdoc(file);
+  var fns = docs.functions || docs.classes[0].functions;
   if (!fns) return;
   // 2. write .md partials for all functions
   write(fns);
