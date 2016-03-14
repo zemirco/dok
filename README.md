@@ -5,7 +5,7 @@ JavaScript documentation generator based on JSDoc.
 
 ## Installation
 
-`npm install doc -g`
+`npm install dok -g`
 
 ## Usage
 
